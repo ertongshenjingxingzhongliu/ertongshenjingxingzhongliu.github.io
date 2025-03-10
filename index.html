@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>儿童神经性肿瘤诊疗信息平台</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            background-color: #007bff;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .navbar a:hover {
+            color: #ffcc00;
+        }
+        .navbar a.active {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        /* 首页横幅 */
+        .banner {
+            background-image: url('图片1.png'); /* 使用您提供的图片 */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 20px; /* 增加内边距 */
+            text-align: left; /* 文字左对齐 */
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end; /* 将内容靠右对齐 */
+            padding-right: 20%; /* 向右移动更多 */
+        }
+        .banner h1 {
+            margin: 0;
+            font-size: 48px; /* 调整字体大小 */
+            font-weight: 900; /* 加粗 */
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7); /* 更强的阴影效果 */
+            color: #fff; /* 白色文字 */
+            margin-bottom: 20px; /* 增加与下方段落的间距 */
+            line-height: 1.2; /* 调整行高 */
+            text-align: right; /* 文字右对齐 */
+        }
+        .banner p {
+            font-size: 24px; /* 调整字体大小 */
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 更强的阴影效果 */
+            color: #ffcc00; /* 亮黄色文字 */
+            font-weight: 700; /* 加粗 */
+            line-height: 1.5; /* 调整行高 */
+            text-align: right; /* 文字右对齐 */
+        }
+
+        /* 内容模块 */
+        .section {
+            padding: 30px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            color: #007bff;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .section p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+        .section ul {
+            padding-left: 20px;
+            list-style-type: disc;
+            color: #555;
+        }
+        .section ul li {
+            margin-bottom: 10px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* 诊断方法卡片 */
+        .diagnosis-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .diagnosis-card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1 1 calc(33.333% - 40px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .diagnosis-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .diagnosis-card h3 {
+            color: #007bff;
+            margin-top: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .diagnosis-card ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+        .diagnosis-card ul li {
+            margin-bottom: 8px;
+        }
+
+        /* 底部信息 */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        .footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer a:hover {
+            color: #e6b800;
+        }
+
+        /* 按钮样式 */
+        .section button {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .section button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 横向排列样式 */
+        .horizontal-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .horizontal-card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1 1 calc(50% - 40px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .horizontal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .horizontal-card h3 {
+            color: #007bff;
+            margin-top: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .horizontal-card ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+        .horizontal-card ul li {
+            margin-bottom: 8px;
+        }
+
+        /* 影像学检查总述样式 */
+        .imaging-summary {
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* 新增样式：点此查看 */
+        .view-link {
+            font-style: italic;
+            text-decoration: underline;
+            color: #ffcc00; /* 与横幅文字颜色一致 */
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <div class="navbar">
+        <a href="#" class="active">首页</a>
+        <a href="#about-disease">关于疾病</a>
+        <a href="#classification">分类及发病率</a>
+        <a href="#causes">病因</a>
+        <a href="#diagnosis">诊断方法</a>
+        <a href="#prevention">预防策略</a>
+        <a href="#treatment">治疗方案</a>
+        <a href="#prognosis">预后评估</a>
+        <a href="#consultation">在线咨询</a>
+        <a href="#database">数据库检索</a>
+        <a href="#about-us">关于我们</a>
+    </div>
+
+    <!-- 首页横幅 -->
+    <div class="banner">
+        <h1>儿童神经性肿瘤诊疗信息平台</h1>
+        <p>提供儿童神经性肿瘤的预测、预防、治疗和预后信息</p>
+    </div>
+
+    <!-- 关于疾病模块 -->
+    <div id="about-disease" class="section">
+        <h2>关于疾病</h2>
+        <p>儿童神经性肿瘤是小儿神经系统常见疾病，发病率在所有儿童易患肿瘤中名列第二，仅次于血液系统疾病。儿童神经性肿瘤治愈率低，目前的治疗方法主要是手术切除原发病灶并辅以术后放化疗。由于儿童处于特殊的生长发育阶段，限制了放化疗的应用，因此手术是儿童脑肿瘤最主要的治疗措施。</p>
+        <!-- 删除了“了解更多”按钮 -->
+    </div>
+
+    <!-- 分类及发病率模块 -->
+    <div id="classification" class="section">
+        <h2>分类及发病率</h2>
+        <p>儿童脑瘤的发病率因肿瘤类型不同而有显著差异。以下是常见的儿童脑瘤类型及其发病率：</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>肿瘤类型</th>
+                    <th>发病率</th>
+                    <th>常见年龄</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>胶质瘤（Gliomas）</td>
+                    <td>40%-50%</td>
+                    <td>各年龄段</td>
+                </tr>
+                <tr>
+                    <td>髓母细胞瘤（Medulloblastoma）</td>
+                    <td>15%-20%</td>
+                    <td>5-9岁</td>
+                </tr>
+                <tr>
+                    <td>室管膜瘤（Ependymoma）</td>
+                    <td>5%-10%</td>
+                    <td>5岁以下</td>
+                </tr>
+                <tr>
+                    <td>颅咽管瘤（Craniopharyngioma）</td>
+                    <td>4%-6%</td>
+                    <td>5-14岁</td>
+                </tr>
+                <tr>
+                    <td>生殖细胞肿瘤（Germ Cell Tumors）</td>
+                    <td>3%-5%</td>
+                    <td>10-19岁</td>
+                </tr>
+                <tr>
+                    <td>胚胎性肿瘤（Embryonal Tumors）</td>
+                    <td>10%-15%</td>
+                    <td>婴幼儿</td>
+                </tr>
+                <tr>
+                    <td>脉络丛肿瘤（Choroid Plexus Tumors）</td>
+                    <td>1%-3%</td>
+                    <td>1岁以下</td>
+                </tr>
+                <tr>
+                    <td>神经节细胞瘤（Ganglioglioma）</td>
+                    <td>1%-2%</td>
+                    <td>儿童和青少年</td>
+                </tr>
+                <tr>
+                    <td>脑膜瘤（Meningioma）</td>
+                    <td>1%-2%</td>
+                    <td>青少年</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 删除了“了解更多”按钮 -->
+    </div>
+
+    <!-- 病因模块 -->
+    <div id="causes" class="section">
+        <h2>病因</h2>
+        <p>儿童神经性肿瘤（如神经母细胞瘤、髓母细胞瘤等）的病因尚未完全明确，但研究表明其发生与以下因素密切相关：</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>病因类型</th>
+                    <th>具体因素</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>遗传因素</td>
+                    <td>
+                        <ul>
+                            <li><strong>基因突变</strong>：如MYCN基因扩增、ALK基因突变、TP53突变等。</li>
+                            <li><strong>遗传综合征</strong>：如神经纤维瘤病（NF1）、Li-Fraumeni综合征等。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>胚胎发育异常</td>
+                    <td>神经母细胞瘤和髓母细胞瘤通常起源于胚胎发育过程中神经嵴细胞或神经前体细胞的异常增殖和分化。</td>
+                </tr>
+                <tr>
+                    <td>环境因素</td>
+                    <td>
+                        <ul>
+                            <li>孕期接触某些化学物质（如农药、苯类化合物）可能与儿童肿瘤的发生有关。</li>
+                            <li>孕期吸烟、饮酒或使用某些药物可能增加胎儿患肿瘤的风险。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>辐射暴露</td>
+                    <td>孕期或儿童期接触电离辐射（如X射线、CT扫描）可能增加肿瘤发生风险。</td>
+                </tr>
+                <tr>
+                    <td>病毒感染</td>
+                    <td>某些病毒感染（如EB病毒、巨细胞病毒）可能与儿童肿瘤的发生有关。</td>
+                </tr>
+                <tr>
+                    <td>免疫系统异常</td>
+                    <td>免疫系统功能异常可能导致肿瘤细胞逃避免疫监视，从而促进肿瘤的发生和发展。</td>
+                </tr>
+                <tr>
+                    <td>危险因素</td>
+                    <td>
+                        <ul>
+                            <li><strong>年龄</strong>：神经母细胞瘤多见于5岁以下儿童，髓母细胞瘤多发于3-8岁儿童。</li>
+                            <li><strong>性别</strong>：男性发病率略高于女性。</li>
+                            <li><strong>家族史</strong>：有神经性肿瘤或其他儿童肿瘤家族史的儿童，患病风险可能增加。</li>
+                            <li><strong>出生体重</strong>：高出生体重可能与神经母细胞瘤的发生风险增加有关。</li>
+                            <li><strong>先天性畸形</strong>：某些先天性畸形可能与儿童肿瘤的发生风险增加有关。</li>
+                            <li><strong>免疫缺陷</strong>：先天性或获得性免疫缺陷可能增加儿童肿瘤的发生风险。</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 删除了“了解更多”按钮 -->
+    </div>
+
+    <!-- 诊断方法模块 -->
+    <div id="diagnosis" class="section">
+        <h2>诊断方法</h2>
+        <div class="horizontal-section">
+            <div class="horizontal-card">
+                <h3>症状和体检</h3>
+                <ul>
+                    <li><strong>常见症状</strong>：腹部肿块、腹痛、体重下降、发热（神经母细胞瘤）；头痛、呕吐、走路不稳（髓母细胞瘤）。</li>
+                    <li><strong>体检</strong>：医生通过触摸腹部或检查神经系统来发现异常。</li>
+                    <li><strong>神经系统检查</strong>：评估反射、肌力、协调性等，帮助定位肿瘤位置。</li>
+                    <li><strong>眼底检查</strong>：检查视乳头水肿，提示颅内压增高。</li>
+                    <li><strong>内分泌功能评估</strong>：某些肿瘤可能影响激素分泌，需进行相关检查。</li>
+                </ul>
+            </div>
+            <div class="horizontal-card">
+                <h3>影像学检查</h3>
+                <ul>
+                    <li><strong>超声</strong>：无痛、无辐射，初步查看腹部肿块。</li>
+                    <li><strong>CT</strong>：详细查看肿瘤大小和位置，但有辐射。</li>
+                    <li><strong>MRI</strong>：无辐射，适合查看脑部和脊柱肿瘤，检查时间较长。</li>
+                    <li><strong>PET-CT</strong>：查看肿瘤是否扩散，费用较高。</li>
+                    <li><strong>骨扫描</strong>：检查肿瘤是否转移到骨头。</li>
+                </ul>
+                <p class="imaging-summary">例如常见肿瘤类型的影像检查：</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>肿瘤类型</th>
+                            <th>影像特征</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>胶质瘤（Gliomas）
+                                <a href="https://radiopaedia.org/search?scope=cases&commit=Search&q=Gliomas" class="view-link">点此查看</a>
+                            </td>
+                            <td>MRI上表现为T1低信号、T2高信号，增强扫描可见不均匀强化。</td>
+                        </tr>
+                        <tr>
+                            <td>髓母细胞瘤（Medulloblastoma）
+                                <a href="https://radiopaedia.org/search?scope=cases&commit=Search&q=Medulloblastoma" class="view-link">点此查看</a>
+                            </td>
+                            <td>CT上表现为高密度肿块，MRI上T1低信号、T2高信号，增强扫描明显强化。</td>
+                        </tr>
+                        <tr>
+                            <td>室管膜瘤（Ependymoma）
+                                <a href="https://radiopaedia.org/search?scope=cases&commit=Search&q=Ependymoma" class="view-link">点此查看</a>
+                            </td>
+                            <td>MRI上表现为T1等或低信号、T2高信号，增强扫描可见不均匀强化。</td>
+                        </tr>
+                        <tr>
+                            <td>颅咽管瘤（Craniopharyngioma）
+                                <a href="https://radiopaedia.org/search?scope=cases&commit=Search&q=Craniopharyngioma" class="view-link">点此查看</a>
+                            </td>
+                            <td>CT上表现为囊性或囊实性肿块，MRI上T1高信号、T2高信号，增强扫描可见囊壁强化。</td>
+                        </tr>
+                        <tr>
+                            <td>生殖细胞肿瘤（Germ Cell Tumors）
+                                <a href="https://radiopaedia.org/search?scope=cases&commit=Search&q=Germ+Cell+Tumors" class="view-link">点此查看</a>
+                            </td>
+                            <td>MRI上表现为T1等或低信号、T2高信号，增强扫描明显强化。</td>
+                        </tr>
+                        <tr>
+                            <td>胚胎性肿瘤（Embryonal Tumors）
+                                <a href="https://radiopaedia.org/search?scope=cases&commit=Search&q=Embryonal+Tumors" class="view-link">点此查看</a>
+                            </td>
+                            <td>MRI上表现为T1低信号、T2高信号，增强扫描可见不均匀强化。</td>
+                        </tr>
+                        <tr>
+                            <td>脉络丛肿瘤（Choroid Plexus Tumors）
+                                <a href="https://radiopaedia.org/search?scope=cases&commit=Search&q=Choroid+Plexus+Tumors" class="view-link">点此查看</a>
+                            </td>
+                            <td>MRI上表现为T1等或低信号、T2高信号，增强扫描明显强化。</td>
+                        </tr>
+                        <tr>
+                            <td>神经节细胞瘤（Ganglioglioma）
+                                <a href="https://radiopaedia.org/search?scope=cases&commit=Search&q=Ganglioglioma" class="view-link">点此查看</a>
+                            </td>
+                            <td>MRI上表现为T1低信号、T2高信号，增强扫描可见不均匀强化。</td>
+                        </tr>
+                        <tr>
+                            <td>脑膜瘤（Meningioma）
+                                <a href="https://radiopaedia.org/search?scope=cases&commit=Search&q=Meningioma" class="view-link">点此查看</a>
+                            </td>
+                            <td>MRI上表现为T1等信号、T2等或高信号，增强扫描明显强化。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="horizontal-card">
+                <h3>实验室检查</h3>
+                <ul>
+                    <li><strong>血液检查</strong>：查看贫血、血小板等指标，检测肿瘤标志物（如VMA、HVA）。</li>
+                    <li><strong>骨髓检查</strong>：通过穿刺检查肿瘤是否扩散到骨髓。</li>
+                    <li><strong>脑脊液检查</strong>：评估肿瘤是否侵犯中枢神经系统。</li>
+                    <li><strong>激素水平检测</strong>：某些肿瘤可能影响激素分泌，需进行相关检查。</li>
+                </ul>
+            </div>
+            <div class="horizontal-card">
+                <h3>病理学检查</h3>
+                <ul>
+                    <li><strong>活检</strong>：取一小块肿瘤组织，在显微镜下观察细胞形态，确定肿瘤类型。</li>
+                    <li><strong>液体活检</strong>：通过抽血检测肿瘤DNA，无创且能动态监测。</li>
+                </ul>
+            </div>
+            <div class="horizontal-card">
+                <h3>分子诊断</h3>
+                <ul>
+                    <li><strong>基因检测</strong>：检查肿瘤是否有特定基因突变（如MYCN、ALK），帮助制定治疗方案。</li>
+                    <li><strong>表观遗传学</strong>：分析DNA甲基化等变化，辅助分型和预后。</li>
+                </ul>
+            </div>
+            <div class="horizontal-card">
+                <h3>分期和风险评估</h3>
+                <ul>
+                    <li><strong>分期</strong>：根据肿瘤大小、位置和扩散程度分为不同阶段。</li>
+                    <li><strong>风险评估</strong>：结合年龄、肿瘤类型、基因突变等因素，评估治疗难度和预后。</li>
+                </ul>
+            </div>
+            <div class="horizontal-card">
+                <h3>最新技术</h3>
+                <ul>
+                    <li><strong>液体活检</strong>：通过血液检测肿瘤，无创且方便。</li>
+                    <li><strong>人工智能（AI）</strong>：帮助医生更快、更准地分析影像和病理结果。</li>
+                    <li><strong>多组学分析</strong>：结合基因、蛋白等多方面数据，实现精准诊断。</li>
+                </ul>
+            </div>
+        </div>
+        <!-- 删除了“了解更多”按钮 -->
+    </div>
+
+    <!-- 预防策略模块 -->
+    <div id="prevention" class="section">
+        <h2>预防策略</h2>
+        <p>儿童神经性肿瘤的预防需要从胚胎期开始，贯穿整个儿童期。以下是具体的预防策略：</p>
+
+        <h3>胚胎期预防</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>预防措施</th>
+                    <th>具体内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>孕期保健</strong></td>
+                    <td>
+                        <ul>
+                            <li>避免接触农药、苯类化合物、重金属等有害化学物质。</li>
+                            <li>减少接触电离辐射（如X射线、CT扫描），除非 medically necessary。</li>
+                            <li>戒烟戒酒，避免二手烟暴露。</li>
+                            <li>避免使用未经医生许可的药物。</li>
+                            <li>保持均衡饮食，摄入足够的叶酸、维生素和矿物质。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>遗传咨询与筛查</strong></td>
+                    <td>
+                        <ul>
+                            <li>有家族史的夫妇应在孕前进行遗传咨询。</li>
+                            <li>通过基因检测（如ALK、TP53基因突变筛查）评估胎儿患病风险。</li>
+                            <li>高风险家庭可通过羊水穿刺或绒毛膜取样进行产前基因检测。</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>胎儿期预防</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>预防措施</th>
+                    <th>具体内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>环境暴露控制</strong></td>
+                    <td>
+                        <ul>
+                            <li>避免长时间暴露在高污染环境中，使用空气净化器改善室内空气质量。</li>
+                            <li>避免使用含有有害化学物质的家用清洁剂、化妆品和个人护理产品。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>母体健康管理</strong></td>
+                    <td>
+                        <ul>
+                            <li>接种推荐疫苗（如流感疫苗、百日咳疫苗），避免感染可能影响胎儿发育的病毒。</li>
+                            <li>控制孕期糖尿病、高血压等慢性疾病。</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>新生儿期预防</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>预防措施</th>
+                    <th>具体内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>新生儿筛查</strong></td>
+                    <td>
+                        <ul>
+                            <li>通过新生儿足跟血检测，筛查可能与肿瘤相关的遗传病。</li>
+                            <li>对于高风险新生儿，可进行超声或MRI检查，早期发现肿瘤。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>健康监测</strong></td>
+                    <td>
+                        <ul>
+                            <li>定期进行儿科体检，监测生长发育情况。</li>
+                            <li>按时接种疫苗，增强免疫力。</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>婴幼儿期预防</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>预防措施</th>
+                    <th>具体内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>环境与生活方式</strong></td>
+                    <td>
+                        <ul>
+                            <li>避免接触二手烟、农药、装修材料中的有害化学物质。</li>
+                            <li>提供均衡饮食，富含蔬菜、水果和全谷物。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>早期筛查</strong></td>
+                    <td>
+                        <ul>
+                            <li>对于高风险儿童，定期检测尿中的儿茶酚胺代谢物或血液中的肿瘤标志物。</li>
+                            <li>如有可疑症状，及时进行超声或CT检查。</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>儿童期预防</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>预防措施</th>
+                    <th>具体内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>健康生活方式</strong></td>
+                    <td>
+                        <ul>
+                            <li>鼓励儿童多吃新鲜蔬菜、水果，少吃加工食品，保持适量运动。</li>
+                            <li>尽量避免不必要的X射线或CT检查，选择无辐射的替代方法。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>定期体检与筛查</strong></td>
+                    <td>
+                        <ul>
+                            <li>每年进行一次全面体检，监测生长发育和健康状况。</li>
+                            <li>对于有家族史或遗传综合征的儿童，定期进行肿瘤标志物检测和影像学检查。</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>最新研究动态</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>研究方向</th>
+                    <th>具体内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>表观遗传学干预</strong></td>
+                    <td>研究表观遗传学改变（如DNA甲基化）在肿瘤发生中的作用，探索通过饮食或药物干预预防肿瘤的可能性。</td>
+                </tr>
+                <tr>
+                    <td><strong>疫苗研发</strong></td>
+                    <td>针对某些与肿瘤相关的病毒（如EB病毒）的疫苗正在研发中，未来可能用于预防相关肿瘤。</td>
+                </tr>
+                <tr>
+                    <td><strong>环境暴露研究</strong></td>
+                    <td>大型流行病学研究正在探索环境因素（如空气污染、化学物质）与儿童肿瘤的关系，为制定预防策略提供依据。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>家庭与社会支持</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>支持措施</th>
+                    <th>具体内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>健康教育</strong></td>
+                    <td>向家长普及儿童肿瘤的预防知识，提高早期发现和干预的意识。</td>
+                </tr>
+                <tr>
+                    <td><strong>政策支持</strong></td>
+                    <td>推动政府制定相关政策，减少环境污染，保障儿童健康。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>通过优化孕期保健、减少环境暴露、早期筛查和健康生活方式，可以显著降低儿童神经性肿瘤的患病风险。对于高风险家庭，遗传咨询和定期监测尤为重要。</p>
+        <!-- 删除了“了解更多”按钮 -->
+    </div>
+
+    <!-- 治疗方案模块 -->
+    <div id="treatment" class="section">
+        <h2>治疗方案</h2>
+        <p>儿童神经性肿瘤的治疗方法多样，包括手术、化疗、放疗、免疫疗法、靶向治疗等，具体方案根据肿瘤类型、分期和风险程度制定。</p>
+
+        <h3>手术治疗</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>目的</th>
+                    <th>适用情况</th>
+                    <th>局限性</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>切除肿瘤，减轻症状，明确诊断</td>
+                    <td>肿瘤局限、可完全切除时优先选择</td>
+                    <td>如果肿瘤靠近重要器官或血管，可能无法完全切除</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>化疗</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>目的</th>
+                    <th>常用药物</th>
+                    <th>适用情况</th>
+                    <th>副作用</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>用药物杀死癌细胞或阻止其生长</td>
+                    <td>环磷酰胺、顺铂、依托泊苷等</td>
+                    <td>几乎所有儿童神经性肿瘤，尤其是高危或转移性肿瘤</td>
+                    <td>脱发、恶心、免疫力下降等</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>放疗</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>目的</th>
+                    <th>适用情况</th>
+                    <th>副作用</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>用高能射线杀死癌细胞</td>
+                    <td>手术后残留肿瘤、无法手术的肿瘤或预防复发</td>
+                    <td>可能影响生长发育，尤其是对幼儿</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>免疫疗法</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>目的</th>
+                    <th>常用方法</th>
+                    <th>副作用</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>激活免疫系统攻击肿瘤细胞</td>
+                    <td>
+                        <ul>
+                            <li><strong>抗GD2抗体</strong>（如Dinutuximab）：用于高危神经母细胞瘤，显著提高生存率</li>
+                            <li><strong>CAR-T细胞疗法</strong>：通过改造T细胞靶向肿瘤，目前处于临床试验阶段</li>
+                        </ul>
+                    </td>
+                    <td>发热、过敏反应等</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>靶向治疗</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>目的</th>
+                    <th>常用药物</th>
+                    <th>优点</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>针对肿瘤特定基因或蛋白进行治疗</td>
+                    <td>
+                        <ul>
+                            <li><strong>ALK抑制剂</strong>（如Crizotinib）：用于ALK基因突变的神经母细胞瘤</li>
+                            <li><strong>MEK抑制剂</strong>（如Selumetinib）：用于低级别胶质瘤和神经纤维瘤病</li>
+                        </ul>
+                    </td>
+                    <td>副作用较少，效果更精准</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>干细胞移植</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>目的</th>
+                    <th>适用情况</th>
+                    <th>过程</th>
+                    <th>风险</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>用健康干细胞替换被化疗或放疗破坏的骨髓</td>
+                    <td>高危神经母细胞瘤或复发肿瘤</td>
+                    <td>先高强度化疗，再输注干细胞</td>
+                    <td>感染、排异反应等</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>支持治疗</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>目的</th>
+                    <th>方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>缓解症状，提高生活质量</td>
+                    <td>
+                        <ul>
+                            <li>止痛药、止吐药等对症治疗</li>
+                            <li>营养支持、心理辅导等</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>最新研究进展</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>研究方向</th>
+                    <th>具体内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>液体活检</strong></td>
+                    <td>通过血液检测肿瘤DNA，动态监测治疗效果</td>
+                </tr>
+                <tr>
+                    <td><strong>质子治疗</strong></td>
+                    <td>精准放疗，减少对正常组织的损伤</td>
+                </tr>
+                <tr>
+                    <td><strong>多组学分析</strong></td>
+                    <td>结合基因、蛋白等多方面数据，制定个性化治疗方案</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>治疗方案的选择</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>肿瘤类型</th>
+                    <th>治疗方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>低危肿瘤</strong></td>
+                    <td>手术+低强度化疗，治愈率高</td>
+                </tr>
+                <tr>
+                    <td><strong>高危肿瘤</strong></td>
+                    <td>手术+高强度化疗+放疗+免疫疗法，必要时干细胞移植</td>
+                </tr>
+                <tr>
+                    <td><strong>复发肿瘤</strong></td>
+                    <td>靶向治疗、免疫疗法或临床试验新药</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>总结：儿童神经性肿瘤的治疗方法多样，包括手术、化疗、放疗、免疫疗法、靶向治疗等，具体方案根据肿瘤类型、分期和风险程度制定。最新研究（如CAR-T细胞疗法、质子治疗）为患者提供了更多希望。</p>
+        <!-- 删除了“了解更多”按钮 -->
+    </div>
+
+    <!-- 预后评估模块 -->
+    <div id="prognosis" class="section">
+        <h2>预后评估</h2>
+        <p>儿童神经系统肿瘤的预后受多种因素影响，整体来说，随着治疗技术的进步，其预后情况逐渐改善，但仍存在一定的挑战。以下是具体情况：</p>
+
+        <h3>影响预后的因素</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>因素</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>肿瘤类型</strong></td>
+                    <td>
+                        <ul>
+                            <li>低级别胶质瘤：5 年生存率可达 80% 以上。</li>
+                            <li>高级别肿瘤（如胶质母细胞瘤）：5 年生存率可能低于 30%。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>肿瘤位置</strong></td>
+                    <td>
+                        <ul>
+                            <li>位于大脑“静区”：预后较好。</li>
+                            <li>位于脑干等重要功能区：预后较差。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>治疗方式</strong></td>
+                    <td>
+                        <ul>
+                            <li>手术切除后结合放疗、化疗：显著提高生存率。</li>
+                            <li>不规范治疗：复发率高，预后差。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>患者年龄</strong></td>
+                    <td>
+                        <ul>
+                            <li>年龄较小（婴幼儿）：预后较差。</li>
+                            <li>年龄较大（儿童）：预后较好。</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>常见儿童神经系统肿瘤的预后</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>肿瘤类型</th>
+                    <th>分组</th>
+                    <th>5 年生存率</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="2"><strong>髓母细胞瘤</strong></td>
+                    <td>标准危险组</td>
+                    <td>70% - 80%</td>
+                    <td>年龄大于 3 岁，肿瘤完全切除，无转移。</td>
+                </tr>
+                <tr>
+                    <td>高危险组</td>
+                    <td>低于 50%</td>
+                    <td>年龄小于 3 岁，肿瘤未完全切除，有转移。</td>
+                </tr>
+                <tr>
+                    <td rowspan="2"><strong>室管膜瘤</strong></td>
+                    <td>低级别</td>
+                    <td>60% - 80%</td>
+                    <td>手术完全切除后预后较好，但易复发。</td>
+                </tr>
+                <tr>
+                    <td>高级别</td>
+                    <td>40% - 60%</td>
+                    <td>恶性程度高，预后较差。</td>
+                </tr>
+                <tr>
+                    <td><strong>颅咽管瘤</strong></td>
+                    <td>良性肿瘤</td>
+                    <td>10 年生存率 80%</td>
+                    <td>手术完全切除后预后较好，但易出现并发症。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>总体而言，随着医学技术的不断进步，包括手术技术的提高、放疗和化疗方案的优化、靶向治疗和免疫治疗等新疗法的出现，儿童神经系统肿瘤的预后在不断改善。但具体每个患儿的预后还需要结合个体情况，由专业医生进行综合评估。</p>
+        <!-- 删除了“了解更多”按钮 -->
+    </div>
+
+    <!-- 在线咨询模块 -->
+    <div id="consultation" class="section">
+        <h2>在线咨询</h2>
+        <p>与专业医生在线交流，获取个性化建议。</p>
+        <button onclick="location.href='#'">立即咨询</button>
+    </div>
+
+    <!-- 数据库检索模块 -->
+    <div id="database" class="section">
+        <h2>数据库检索</h2>
+        <p>检索儿童神经性肿瘤的临床数据，了解治疗方案和预后信息。</p>
+        <button onclick="location.href='#'">开始检索</button>
+    </div>
+
+    <!-- 关于我们模块 -->
+    <div id="about-us" class="section">
+        <h2>关于我们</h2>
+        <p>我们是一个致力于儿童神经性肿瘤研究的团队，旨在通过科学研究和数据模型，帮助更多患儿和家庭。</p>
+        <!-- 删除了“了解更多”按钮 -->
+    </div>
+
+    <!-- 底部信息 -->
+    <div class="footer">
+        <p>联系我们 | <a href="#">社交媒体链接</a> | 版权信息 © 2024 儿童神经性肿瘤诊疗信息平台</p>
+    </div>
+
+    <!-- 导航栏高亮逻辑 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.navbar a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
